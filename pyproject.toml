@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qtpy-robust-views"
+version = "0.1.0"
+description = "Hardened QTreeView/QTableView/QListView and related qtpy widgets"
+readme = "README.md"
+license = { text = "LGPL-3.0-or-later" }
+requires-python = ">=3.8"
+authors = [{ name = "bodencrouch" }]
+dependencies = [
+    "qtpy",
+]
+
+[project.urls]
+Homepage = "https://github.com/bodencrouch/qtpy-robust-views"
+Repository = "https://github.com/bodencrouch/qtpy-robust-views"
+
+[tool.setuptools.packages.find]
+where = ["src"]
