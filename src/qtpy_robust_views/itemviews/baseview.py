@@ -54,7 +54,7 @@ except ImportError:
     import logging
     def RobustLogger(*a, **k):
         return logging.getLogger('qtpy_robust_views')
-from qtpy_robust_views._compat import  # gui.qt.tools.qt_meta import get_qt_meta_type
+from qtpy_robust_views._compat import get_qt_meta_type
 
 if TYPE_CHECKING:
     from qtpy.QtCore import (
