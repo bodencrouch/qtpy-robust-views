@@ -25,13 +25,12 @@ no server or long-running service. The only runnable "apps" are the per-module
 ### Run the GUI demos
 - Use the XFCE desktop on `DISPLAY=:1` with the xcb platform, e.g.
   `DISPLAY=:1 QT_QPA_PLATFORM=xcb python -m qtpy_robust_views.itemviews.treeview`.
+- Several other view modules also expose `__main__` demos.
 
-### Known blocking source bug (non-obvious)
-- `src/qtpy_robust_views/itemviews/baseview.py:57` has an incomplete import
-  (`from qtpy_robust_views._compat import`) and `get_qt_meta_type` (used later in
-  that file) is missing from `_compat.py`, which is only a stub. This `SyntaxError`
-  makes every core view (`treeview`/`tableview`/`listview`/`headerview`/
-  `stacked_view`) unimportable. The `tests/test_smoke.py` test still passes because
-  it only imports the top-level package, which pulls in none of the widget modules.
-  To import or run any view, complete that import and implement `get_qt_meta_type`
-  in `_compat.py` (map Python `int`/`float`/`bool`/`str` to `QMetaType.Type`).
+### Non-obvious notes
+- `tests/test_smoke.py` only imports the top-level `qtpy_robust_views` package,
+  which pulls in none of the widget modules. So the suite can pass even if a
+  widget module (e.g. `itemviews/baseview.py`) fails to import. When changing the
+  widgets, import them explicitly (or run a demo) to catch import-time errors.
+- `get_qt_meta_type` lives in `qtpy_robust_views/_compat.py` and backs the
+  context-menu editor widgets in `baseview.py` (`_create_input_widget`).
